@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.7.11"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
+    id("com.heroku.sdk.heroku-gradle") version "3.0.0"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
 }
@@ -37,6 +38,12 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+heroku {
+    appName = "chaiyapong-random-user"
+    jdkVersion = "1.8"
+    processTypes = mapOf("web" to "java -Dserver.port=\$PORT \$JAVA_OPTS -jar build/libs/random-user-api-1.0.0.jar")
 }
 
 
