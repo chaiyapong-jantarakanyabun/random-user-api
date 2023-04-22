@@ -40,6 +40,15 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+tasks {
+    withType<Jar> {
+        manifest {
+            attributes["Main-Class"] = application.mainClass
+        }
+        from(configurations.runtimeClasspath.get().map {if (it.isDirectory) it else zipTree(it)})
+    }
+}
+
 application {
     mainClass.set("th.co.the1.randomuserapi.RandomUserApiApplication")
 }
