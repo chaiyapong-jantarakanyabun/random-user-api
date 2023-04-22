@@ -22,7 +22,7 @@ class RandomUserService @Autowired constructor(private val randomUserApiService:
                 if (null != result.get("name")) {
                     name = result.get("name")
                     if (null != name.get("first")) {
-                        randomUserResponse.firstname = "${name.get("title").textValue()} ${name.get("first").textValue()}"
+                        randomUserResponse.firstname = name.get("first").textValue()
                     }
                     if (null != name.get("last")) {
                         randomUserResponse.lastname = name.get("last").textValue()
